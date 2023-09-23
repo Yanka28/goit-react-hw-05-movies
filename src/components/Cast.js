@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-export const Cast = ({ items }) => {
+const Cast = ({ items }) => {
   const location = useLocation();
   const params = useParams();
   console.log(params);
@@ -15,7 +15,6 @@ export const Cast = ({ items }) => {
         const fetchedCredits = await getMoviesCredits(params.movieId);
         console.log('fetchedCredits', fetchedCredits);
         setCredits(fetchedCredits);
-        console.log(credits);
       } catch (error) {
         console.log(error);
       }
@@ -46,3 +45,4 @@ export const Cast = ({ items }) => {
     </div>
   );
 };
+export default Cast;

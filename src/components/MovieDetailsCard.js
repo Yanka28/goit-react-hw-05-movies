@@ -65,15 +65,17 @@ export const MovieDetailsCard = ({ movie, movieId }) => {
       </Card>
       <h4>Additional information</h4>
       <Exposition>
-        <Link to={`/movies/${movieId}/cast`} state={{ from: location }}>
-          Cast
-        </Link>
-        <Link to={`/movies/${movieId}/reviews`} state={{ from: location }}>
-          Reviews
-        </Link>
+        <li>
+          <Link to={`/movies/${movieId}/cast`} state={{ from: location }}>
+            Cast
+          </Link>
+        </li>
+        <li>
+          <Link to={`/movies/${movieId}/reviews`} state={{ from: location }}>
+            Reviews
+          </Link>
+        </li>
       </Exposition>
     </Wrapper>
-
-    //   <Link to='/' state={{ from: location }}> Go back </Link>
   );
 };

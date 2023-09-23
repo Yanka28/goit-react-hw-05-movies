@@ -27,7 +27,7 @@ export const Goback = styled.div`
 
 export const Wrapper = styled.div``;
 
-export const Exposition = styled.div`
+export const Exposition = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 10px;

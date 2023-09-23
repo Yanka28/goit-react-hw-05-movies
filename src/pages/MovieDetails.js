@@ -1,6 +1,7 @@
 import { MovieDetailsCard } from '../components/MovieDetailsCard';
 import { getMoviesDetails } from 'api';
 import { useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { useLocation, useParams, Outlet } from 'react-router-dom';
 
 export default function MoviesDetails() {
@@ -30,7 +31,9 @@ export default function MoviesDetails() {
           <MovieDetailsCard movie={movie} movieId={params.movieId} />
         </div>
       )}
-      <Outlet />
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }
