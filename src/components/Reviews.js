@@ -26,5 +26,22 @@ export const Reviews = () => {
     getReviews();
   }, [params.movieId]);
 
-  return <div>{/* <p>{reviewsItems}</p> */}</div>;
+  return (
+    <div>
+      {
+        <ul>
+          {reviewsItems.length > 0
+            ? reviewsItems.map(reviewsItem => (
+                <li key={reviewsItem.id}>
+                  <p>
+                    <b>{reviewsItem.author}</b>
+                  </p>
+                  <p>{reviewsItem.content}</p>
+                </li>
+              ))
+            : 'OOPS! THERE WAS NO REVIEWS!'}
+        </ul>
+      }
+    </div>
+  );
 };
