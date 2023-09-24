@@ -1,16 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
-// import { BsArrowLeftCircle } from 'react-icons/bs';
-import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+// import { useRef } from 'react';
 import {
   Description,
   ModalImg,
   Card,
   GanresList,
-  Goback,
   Exposition,
   ExpositionBlock,
 } from './MovieDetailsCard.styled';
-// import { Topic, Wrapper, MetaWrapper, Text, Button } from './QuizCard.styled';
 
 export const MovieDetailsCard = ({ movie, movieId }) => {
   const {
@@ -24,17 +22,17 @@ export const MovieDetailsCard = ({ movie, movieId }) => {
   } = movie;
 
   const location = useLocation();
-  const backLink = useRef(location.state?.from ?? '/');
+  // const backLink = useRef(location.state?.from ?? '/');
 
-  console.log('location', location);
-  console.log('backLink', location.state?.from ?? '/');
-  console.log('backLink', location.state?.from);
+  // console.log('location', location);
+  // console.log('backLink', location.state?.from ?? '/');
+  // console.log('backLink', location.state?.from);
 
   return (
     <>
-      <Goback>
-        <Link to={backLink.current}>Go back</Link>
-      </Goback>
+      {/* <Goback>
+        <Link to={backLink.current}>&#8592; Go back</Link>
+      </Goback> */}
       <Card>
         <ModalImg>
           <img

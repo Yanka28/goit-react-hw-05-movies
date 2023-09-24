@@ -9,11 +9,13 @@ const Reviews = () => {
   const params = useParams();
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function getReviews() {
       try {
         setLoading(true);
         setError(false);
-        const results = await getMoviesReviews(params.movieId);
+        const results = await getMoviesReviews(params.movieId, controller);
         setReviewsItems(results);
       } catch (error) {
         setError(true);
@@ -22,6 +24,7 @@ const Reviews = () => {
       }
     }
     getReviews();
+    return () => controller.abort();
   }, [params.movieId]);
 
   return (

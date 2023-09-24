@@ -34,7 +34,6 @@ export default function Movies() {
         const results = await searchMovies(productName, controllerRef.current);
         setMoviesItems(results);
         {
-          console.log(results);
           results.length > 0
             ? toast.success('ОСЬ ЩО МИ ПІДІБРАЛИ ДЛЯ ТЕБЕ!')
             : toast.error('ЗА ТАКИМ ЗАПИТОМ ВІДСУТНІ ФІЛЬМИ!');

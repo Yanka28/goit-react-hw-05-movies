@@ -2,18 +2,28 @@ import { AxiosError } from 'axios';
 import { MovieDetailsCard } from '../components/MovieDetailsCard';
 import { getMoviesDetails } from 'api';
 import { useEffect, useState } from 'react';
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
 import toast from 'react-hot-toast';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
+// import { Goback } from './MovieDetailsCard.styled';
 
 export default function MoviesDetails() {
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? '/');
+
+  console.log('location', location);
+  console.log('backLink', location.state?.from ?? '/');
+  console.log('backLink', location.state?.from);
+
   const params = useParams();
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchMovie() {
       try {
-        const fetchedMovie = await getMoviesDetails(params.movieId);
+        const fetchedMovie = await getMoviesDetails(params.movieId, controller);
         setMovie(fetchedMovie);
       } catch (error) {
         error.code === 'ERR_BAD_REQUEST'
@@ -24,14 +34,20 @@ export default function MoviesDetails() {
     }
 
     fetchMovie();
+    return () => controller.abort();
   }, [params.movieId]);
 
   return (
     <div>
       {movie && (
-        <div>
+        <>
+          {/* <Goback> */}
+          <div>
+            <Link to={backLink.current}>&#8592; Go back</Link>
+          </div>
+          {/* </Goback> */}
           <MovieDetailsCard movie={movie} movieId={params.movieId} />
-        </div>
+        </>
       )}
       <Suspense fallback={<div>Loading subpage...</div>}>
         <Outlet />

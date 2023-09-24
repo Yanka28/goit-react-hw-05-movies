@@ -10,11 +10,12 @@ export default function HomePage() {
   // HTTP запит за популярними фільмами
 
   useEffect(() => {
+    const controller = new AbortController();
     async function getMovies() {
       try {
         setLoading(true);
         setError(false);
-        const results = await fetchPopMovies();
+        const results = await fetchPopMovies(controller);
         setMoviesItems(results);
       } catch (error) {
         setError(true);
@@ -23,6 +24,7 @@ export default function HomePage() {
       }
     }
     getMovies();
+    return () => controller.abort();
   }, []);
 
   return (
