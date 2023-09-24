@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-// import { useRef } from 'react';
 import {
   Description,
   ModalImg,
@@ -22,17 +21,9 @@ export const MovieDetailsCard = ({ movie, movieId }) => {
   } = movie;
 
   const location = useLocation();
-  // const backLink = useRef(location.state?.from ?? '/');
-
-  // console.log('location', location);
-  // console.log('backLink', location.state?.from ?? '/');
-  // console.log('backLink', location.state?.from);
 
   return (
     <>
-      {/* <Goback>
-        <Link to={backLink.current}>&#8592; Go back</Link>
-      </Goback> */}
       <Card>
         <ModalImg>
           <img

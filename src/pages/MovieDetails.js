@@ -1,11 +1,9 @@
-import { AxiosError } from 'axios';
 import { MovieDetailsCard } from '../components/MovieDetailsCard';
 import { getMoviesDetails } from 'api';
 import { useEffect, useState } from 'react';
 import { Suspense, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
-// import { Goback } from './MovieDetailsCard.styled';
 
 export default function MoviesDetails() {
   const location = useLocation();
@@ -41,11 +39,9 @@ export default function MoviesDetails() {
     <div>
       {movie && (
         <>
-          {/* <Goback> */}
           <div>
             <Link to={backLink.current}>&#8592; Go back</Link>
           </div>
-          {/* </Goback> */}
           <MovieDetailsCard movie={movie} movieId={params.movieId} />
         </>
       )}

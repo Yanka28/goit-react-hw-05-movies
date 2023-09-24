@@ -1,10 +1,9 @@
 import { getMoviesCredits } from 'api';
 import { CastFoto, Fotoimg } from './Cast.styled';
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const Cast = ({ items }) => {
-  const location = useLocation();
   const params = useParams();
   const [credits, setCredits] = useState(null);
 

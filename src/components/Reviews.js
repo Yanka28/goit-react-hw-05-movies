@@ -1,6 +1,6 @@
 import { getMoviesReviews } from 'api';
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const Reviews = () => {
   const [reviewsItems, setReviewsItems] = useState([]);
@@ -29,6 +29,8 @@ const Reviews = () => {
 
   return (
     <div>
+      {loading && <div>LOADING...</div>}
+      {error && !loading && <div>OOPS! THERE WAS AN ERROR!</div>}
       {
         <ul>
           {reviewsItems.length > 0
