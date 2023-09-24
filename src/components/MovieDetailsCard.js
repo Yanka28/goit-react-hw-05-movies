@@ -64,12 +64,12 @@ export const MovieDetailsCard = ({ movie, movieId }) => {
         <Exposition>
           <li>
             <Link to={`/movies/${movieId}/cast`} state={{ from: location }}>
-              Cast
+              <b>Cast</b>
             </Link>
           </li>
           <li>
             <Link to={`/movies/${movieId}/reviews`} state={{ from: location }}>
-              Reviews
+              <b> Reviews</b>
             </Link>
           </li>
         </Exposition>

@@ -28,6 +28,6 @@ ul {
     object-fit: cover;
   }
   a {
+    
   color: darkviolet;
-};
-`;
+}`;

@@ -9,10 +9,6 @@ export default function MoviesDetails() {
   const location = useLocation();
   const backLink = useRef(location.state?.from ?? '/');
 
-  console.log('location', location);
-  console.log('backLink', location.state?.from ?? '/');
-  console.log('backLink', location.state?.from);
-
   const params = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -40,7 +36,9 @@ export default function MoviesDetails() {
       {movie && (
         <>
           <div>
-            <Link to={backLink.current}>&#8592; Go back</Link>
+            <Link to={backLink.current}>
+              <b>&#8592; Go back</b>
+            </Link>
           </div>
           <MovieDetailsCard movie={movie} movieId={params.movieId} />
         </>
