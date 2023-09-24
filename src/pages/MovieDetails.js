@@ -1,4 +1,4 @@
-import { MovieDetailsCard } from '../components/MovieDetailsCard';
+import { MovieDetailsCard } from '../components/MovieDetailsCard/MovieDetailsCard';
 import { getMoviesDetails } from 'api';
 import { useEffect, useState } from 'react';
 import { Suspense, useRef } from 'react';

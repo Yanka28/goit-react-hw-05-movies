@@ -1,6 +1,6 @@
 import { fetchPopMovies } from 'api';
 import { useEffect, useState } from 'react';
-import { MoviesList } from 'components/MoviesList';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
 export default function HomePage() {
   const [moviesItems, setMoviesItems] = useState([]);

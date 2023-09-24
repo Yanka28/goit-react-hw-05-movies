@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
 import { useState, useRef } from 'react';
-import { SearchBox } from 'components/SearchBox';
+import { SearchBox } from 'components/SearchBox/SearchBox';
 import toast from 'react-hot-toast';
 import { searchMovies } from 'api';
-import { MoviesList } from 'components/MoviesList';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
 export default function Movies() {
   const [moviesItems, setMoviesItems] = useState([]);

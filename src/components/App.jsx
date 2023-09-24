@@ -1,13 +1,13 @@
 import { lazy } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { GlobalStyle } from './GlobalStyle';
-import { SharedLayout } from './SharedLayout';
+import { SharedLayout } from './SharedLayout/SharedLayout';
 import { Route, Routes } from 'react-router-dom';
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const Movies = lazy(() => import('../pages/Movies'))
 const MovieDetails = lazy(() => import('../pages/MovieDetails.js')) 
-const Cast = lazy(() => import('./Cast'))
+const Cast = lazy(() => import('./Cast/Cast'))
 const Reviews = lazy(() => import('./Reviews'))
 
 
