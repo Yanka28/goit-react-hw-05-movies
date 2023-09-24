@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { SearchBox } from 'components/SearchBox';
 import toast from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
@@ -12,10 +12,7 @@ export default function Movies() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const productName = searchParams.get('name') ?? '';
-
-  const location = useLocation();
-  console.log(location);
-  console.log(searchParams);
+  const controllerRef = useRef();
 
   const updateQueryString = name => {
     const nextParams = name !== '' ? { name } : {};
@@ -24,11 +21,17 @@ export default function Movies() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
+
     async function getMovies() {
+      if (controllerRef.current) {
+        controllerRef.current.abort();
+      }
+      controllerRef.current = new AbortController();
+
       try {
         setLoading(true);
         setError(false);
-        const results = await searchMovies(productName);
+        const results = await searchMovies(productName, controllerRef.current);
         setMoviesItems(results);
         {
           console.log(results);

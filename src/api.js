@@ -9,9 +9,10 @@ export const fetchPopMovies = async () => {
   return resp.data.results;
 };
 
-export const searchMovies = async query => {
+export const searchMovies = async (query, value) => {
   const resp = await axios.get(
-    `/search/movie?api_key=3a2795324b0fc13c7d8f10a87e487cb9&query=${query}&include_adult=false&language=en-US&page=1`
+    `/search/movie?api_key=3a2795324b0fc13c7d8f10a87e487cb9&query=${query}&include_adult=false&language=en-US&page=1`,
+    { signal: value.signal }
   );
   return resp.data.results;
 };
@@ -23,9 +24,10 @@ export const getMoviesDetails = async id => {
   return resp.data;
 };
 
-export const getMoviesCredits = async id => {
+export const getMoviesCredits = async (id, value) => {
   const resp = await axios.get(
-    `/movie/${id}/credits?api_key=3a2795324b0fc13c7d8f10a87e487cb9&language=en-US`
+    `/movie/${id}/credits?api_key=3a2795324b0fc13c7d8f10a87e487cb9&language=en-US`,
+    { signal: value.signal }
   );
   return resp.data.cast;
 };

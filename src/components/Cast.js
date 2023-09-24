@@ -9,9 +9,14 @@ const Cast = ({ items }) => {
   const [credits, setCredits] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchCredits() {
       try {
-        const fetchedCredits = await getMoviesCredits(params.movieId);
+        const fetchedCredits = await getMoviesCredits(
+          params.movieId,
+          controller
+        );
         setCredits(fetchedCredits);
       } catch (error) {
         console.log(error);
@@ -19,6 +24,7 @@ const Cast = ({ items }) => {
     }
 
     fetchCredits();
+    return () => controller.abort();
   }, [params.movieId]);
 
   return (
