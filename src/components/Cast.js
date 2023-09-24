@@ -1,19 +1,17 @@
 import { getMoviesCredits } from 'api';
-import { NavLink } from 'react-router-dom';
+import { CastFoto, Fotoimg } from './Cast.styled';
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 const Cast = ({ items }) => {
   const location = useLocation();
   const params = useParams();
-  console.log(params);
   const [credits, setCredits] = useState(null);
 
   useEffect(() => {
     async function fetchCredits() {
       try {
         const fetchedCredits = await getMoviesCredits(params.movieId);
-        console.log('fetchedCredits', fetchedCredits);
         setCredits(fetchedCredits);
       } catch (error) {
         console.log(error);
@@ -27,8 +25,8 @@ const Cast = ({ items }) => {
     <div>
       <ul>
         {credits?.map(item => (
-          <li key={item.id}>
-            <img
+          <CastFoto key={item.id}>
+            <Fotoimg
               src={
                 item.profile_path
                   ? `https://image.tmdb.org/t/p/original/${item.profile_path}`
@@ -37,9 +35,11 @@ const Cast = ({ items }) => {
               alt=""
               width="150"
             />
-            <p>{item.name}</p>
+            <p>
+              <b>{item.name}</b>
+            </p>
             <p>Character : {item.character}</p>
-          </li>
+          </CastFoto>
         ))}
       </ul>
     </div>

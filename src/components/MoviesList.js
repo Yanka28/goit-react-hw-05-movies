@@ -1,15 +1,15 @@
 import { NavLink } from 'react-router-dom';
-
+import { List, Item } from './MoviesList.styled';
 export const MoviesList = ({ items }) => {
   return (
     <div>
-      <ul>
+      <List>
         {items.map(item => (
           <NavLink to={`/movies/${item.id}`} key={item.id}>
-            <li>{item.title ? item.title : item.name}</li>
+            <Item>{item.title ? item.title : item.name}</Item>
           </NavLink>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };

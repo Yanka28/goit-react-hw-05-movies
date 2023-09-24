@@ -1,12 +1,12 @@
+import { AxiosError } from 'axios';
 import { MovieDetailsCard } from '../components/MovieDetailsCard';
 import { getMoviesDetails } from 'api';
 import { useEffect, useState } from 'react';
 import { Suspense } from 'react';
-import { useLocation, useParams, Outlet } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useParams, Outlet } from 'react-router-dom';
 
 export default function MoviesDetails() {
-  const location = useLocation();
-
   const params = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -16,6 +16,9 @@ export default function MoviesDetails() {
         const fetchedMovie = await getMoviesDetails(params.movieId);
         setMovie(fetchedMovie);
       } catch (error) {
+        error.code === 'ERR_BAD_REQUEST'
+          ? toast.error('REQUEST FAILED WITH STATUS CODE 404!')
+          : toast.error('ОАКОЇ, СПРОБУЙ ЩЕ РАЗ!');
         console.log(error);
       }
     }
@@ -25,7 +28,6 @@ export default function MoviesDetails() {
 
   return (
     <div>
-      {/* <Link to={location?.state?.from ?? '/quizzes'}>Back to quizzes</Link> */}
       {movie && (
         <div>
           <MovieDetailsCard movie={movie} movieId={params.movieId} />

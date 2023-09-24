@@ -1,14 +1,14 @@
-// import { searchMovies } from 'api';
-
+import { Button, Input } from './SearchBox.styled';
 export const SearchBox = ({ value, onChange, onSubmit }) => {
   return (
     <form onSubmit={onSubmit}>
-      <input
+      <Input
         type="text"
         value={value}
         onChange={e => onChange(e.target.value)}
+        placeholder="Search movies"
       />
-      <button type="submit">Search</button>
+      <Button type="submit">Search</Button>
     </form>
   );
 };

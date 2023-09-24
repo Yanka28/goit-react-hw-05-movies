@@ -27,4 +27,7 @@ ul {
     max-width: 100%;
     object-fit: cover;
   }
+  a {
+  color: darkviolet;
+};
 `;

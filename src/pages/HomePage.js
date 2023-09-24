@@ -1,9 +1,6 @@
 import { fetchPopMovies } from 'api';
 import { useEffect, useState } from 'react';
 import { MoviesList } from 'components/MoviesList';
-import toast from 'react-hot-toast';
-
-// import { useQueryParams } from 'hooks/useQueryParams';
 
 export default function HomePage() {
   const [moviesItems, setMoviesItems] = useState([]);
@@ -19,7 +16,6 @@ export default function HomePage() {
         setError(false);
         const results = await fetchPopMovies();
         setMoviesItems(results);
-        toast.success('ВСЕ ЧУДОВО!');
       } catch (error) {
         setError(true);
       } finally {
