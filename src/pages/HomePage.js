@@ -1,5 +1,6 @@
 import { fetchPopMovies } from 'api';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 
 export default function HomePage() {
@@ -17,7 +18,10 @@ export default function HomePage() {
         const results = await fetchPopMovies(controller);
         setMoviesItems(results);
       } catch (error) {
-        if (error.code !== 'ERR_CANCELED') setError(error);
+        if (error.code !== 'ERR_CANCELED') {
+          setError(error);
+          toast.error('ОТАКОЇ...ХАЛЕПА (. СПРОБУЙ ЩЕРАЗ');
+        }
       } finally {
         setLoading(false);
       }

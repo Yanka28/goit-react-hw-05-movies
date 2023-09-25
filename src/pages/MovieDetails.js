@@ -2,7 +2,6 @@ import { MovieDetailsCard } from '../components/MovieDetailsCard/MovieDetailsCar
 import { getMoviesDetails } from 'api';
 import { useEffect, useState } from 'react';
 import { Suspense, useRef } from 'react';
-// import toast from 'react-hot-toast';
 import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
 
 export default function MoviesDetails() {

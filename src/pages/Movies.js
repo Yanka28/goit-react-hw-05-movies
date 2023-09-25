@@ -9,35 +9,30 @@ export default function Movies() {
   const [moviesItems, setMoviesItems] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const productName = searchParams.get('name') ?? '';
-  // const controllerRef = useRef();
-
-  // const updateQueryString = name => {
-  //   const nextParams = name !== '' ? { name } : {};
-  //   setSearchParams(nextParams);
-  // };
 
   const handleSubmit = e => {
     e.preventDefault();
     const query = e.target.elements.query.value.trim();
-    console.log(query);
     setSearchParams({ name: query });
   };
 
   useEffect(() => {
     const controller = new AbortController();
+    if (productName === '') return;
     async function getMovies() {
       try {
         setLoading(true);
-        setError(false);
         const results = await searchMovies(productName, controller);
         setMoviesItems(results);
-        results.length > 0
-          ? toast.success('ОСЬ ЩО МИ ПІДІБРАЛИ ДЛЯ ТЕБЕ!')
-          : toast.error('ЗА ТАКИМ ЗАПИТОМ ВІДСУТНІ ФІЛЬМИ!');
+        if (results.length === 0)
+          toast.error('ЗА ТАКИМ ЗАПИТОМ ВІДСУТНІ ФІЛЬМИ!');
       } catch (error) {
-        if (error.code !== 'ERR_CANCELED') setError(error);
+        if (error.code !== 'ERR_CANCELED') {
+          setError(error);
+          toast.error('ОТАКОЇ...ХАЛЕПА (. СПРОБУЙ ЩЕРАЗ');
+        }
       } finally {
         setLoading(false);
       }
@@ -46,35 +41,13 @@ export default function Movies() {
     return () => controller.abort();
   }, [productName]);
 
-  //   async function getMovies() {
-  //     try {
-  //       setLoading(true);
-  //       setError(false);
-  //       const results = await searchMovies(productName);
-  //       setMoviesItems(results);
-  //       results.length > 0
-  //         ? toast.success('ОСЬ ЩО МИ ПІДІБРАЛИ ДЛЯ ТЕБЕ!')
-  //         : toast.error('ЗА ТАКИМ ЗАПИТОМ ВІДСУТНІ ФІЛЬМИ!');
-  //     } catch (error) {
-  //       if (error.code !== 'ERR_CANCELED') setError(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  //   getMovies();
-  // };
-
   return (
     <>
-      <SearchBox
-        // value={productName}
-        // onChange={updateQueryString}
-        onSubmit={handleSubmit}
-      />
+      <SearchBox onSubmit={handleSubmit} />
       <div>
         {loading && <div>LOADING...</div>}
-        {error && !loading && <div>OOPS! THERE WAS AN ERROR!</div>}
-        <MoviesList items={moviesItems} />
+        {error && <div>OOPS! THERE WAS AN ERROR!</div>}
+        {moviesItems.length > 0 && <MoviesList items={moviesItems} />}
       </div>
     </>
   );

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 const Reviews = () => {
   const [reviewsItems, setReviewsItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const params = useParams();
 
   useEffect(() => {
@@ -14,11 +14,10 @@ const Reviews = () => {
     async function getReviews() {
       try {
         setLoading(true);
-        setError(false);
         const results = await getMoviesReviews(params.movieId, controller);
         setReviewsItems(results);
       } catch (error) {
-        setError(true);
+        if (error.code !== 'ERR_CANCELED') setError(error);
       } finally {
         setLoading(false);
       }
@@ -30,7 +29,7 @@ const Reviews = () => {
   return (
     <div>
       {loading && <div>LOADING...</div>}
-      {error && !loading && <div>OOPS! THERE WAS AN ERROR!</div>}
+      {error && <div>OOPS! THERE WAS AN ERROR!</div>}
       {
         <ul>
           {reviewsItems.length > 0
