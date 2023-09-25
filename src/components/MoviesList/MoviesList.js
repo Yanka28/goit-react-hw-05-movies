@@ -1,13 +1,13 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Gallery, Item, Movie, Image } from './MoviesList.styled';
 export const MoviesList = ({ items }) => {
-  console.log(items);
+  const location = useLocation();
   return (
     <div>
       <Gallery>
         {items.map(item => (
           <Movie key={item.id}>
-            <NavLink to={`/movies/${item.id}`}>
+            <NavLink to={`/movies/${item.id}`} state={{ from: location }}>
               <Image
                 src={
                   item.backdrop_path
