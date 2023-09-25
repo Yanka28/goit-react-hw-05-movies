@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { Gallery, Item, Movie, Image } from './MoviesList.styled';
+
 export const MoviesList = ({ items }) => {
   const location = useLocation();
   return (
@@ -16,7 +17,7 @@ export const MoviesList = ({ items }) => {
                 }
                 width="200"
                 height="150"
-                alt=""
+                alt="foto"
               />
               <Item>{item.title ? item.title : item.name}</Item>
             </NavLink>

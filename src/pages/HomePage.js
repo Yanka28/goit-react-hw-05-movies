@@ -5,7 +5,7 @@ import { MoviesList } from 'components/MoviesList/MoviesList';
 export default function HomePage() {
   const [moviesItems, setMoviesItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   // HTTP запит за популярними фільмами
 
@@ -14,11 +14,10 @@ export default function HomePage() {
     async function getMovies() {
       try {
         setLoading(true);
-        setError(false);
         const results = await fetchPopMovies(controller);
         setMoviesItems(results);
       } catch (error) {
-        setError(true);
+        if (error.code !== 'ERR_CANCELED') setError(error);
       } finally {
         setLoading(false);
       }
@@ -31,8 +30,8 @@ export default function HomePage() {
     <div>
       <h1> Trending today</h1>
       {loading && <div>LOADING...</div>}
-      {error && !loading && <div>OOPS! THERE WAS AN ERROR!</div>}
-      <MoviesList items={moviesItems} />
+      {error && <div>OOPS! THERE WAS AN ERROR!</div>}
+      {moviesItems.length > 0 && <MoviesList items={moviesItems} />}
     </div>
   );
 }

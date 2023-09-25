@@ -1,12 +1,14 @@
 import { Button, Input } from './SearchBox.styled';
-export const SearchBox = ({ value, onChange, onSubmit }) => {
+
+export const SearchBox = ({ onSubmit }) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={e => onSubmit(e)}>
       <Input
         type="text"
-        value={value}
-        onChange={e => onChange(e.target.value)}
+        // value={value}
+        // onChange={e => onChange(e.target.value)}
         placeholder="Search movies"
+        name="query"
       />
       <Button type="submit">Search</Button>
     </form>

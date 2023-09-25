@@ -6,19 +6,24 @@ import { useParams } from 'react-router-dom';
 const Cast = ({ items }) => {
   const params = useParams();
   const [credits, setCredits] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
 
     async function fetchCredits() {
       try {
+        setLoading(true);
         const fetchedCredits = await getMoviesCredits(
           params.movieId,
           controller
         );
         setCredits(fetchedCredits);
       } catch (error) {
-        console.log(error);
+        if (error.code !== 'ERR_CANCELED') setError(error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -28,6 +33,8 @@ const Cast = ({ items }) => {
 
   return (
     <div>
+      {loading && <div>LOADING...</div>}
+      {error && !loading && <div>OOPS! THERE WAS AN ERROR!</div>}
       <ul>
         {credits?.map(item => (
           <CastFoto key={item.id}>

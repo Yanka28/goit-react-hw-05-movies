@@ -9,7 +9,7 @@ import {
   ExpositionBlock,
 } from './MovieDetailsCard.styled';
 
-export const MovieDetailsCard = ({ movie, movieId }) => {
+export const MovieDetailsCard = ({ movie }) => {
   const {
     title,
     vote_average,
@@ -63,12 +63,12 @@ export const MovieDetailsCard = ({ movie, movieId }) => {
         <h4>Additional information</h4>
         <Exposition>
           <li>
-            <Link to={`/movies/${movieId}/cast`} state={{ from: location }}>
+            <Link to={'cast'} state={{ from: location }}>
               <b>Cast</b>
             </Link>
           </li>
           <li>
-            <Link to={`/movies/${movieId}/reviews`} state={{ from: location }}>
+            <Link to={'reviews'} state={{ from: location }}>
               <b> Reviews</b>
             </Link>
           </li>
